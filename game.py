@@ -58,11 +58,9 @@ class BaseReactor(object):
             for item_cls in self.items_clss:
                 for sources in item_cls.source_clss:
                     self.reactions.append((sources, (), (item_cls, )))
-                    print(self.reactions)
 
     @staticmethod
     def compare_items(items, sources_sample):
-        print(sources_sample)
         for i, item in enumerate(items):
             if i >= len(sources_sample):
                 return True
@@ -74,7 +72,6 @@ class BaseReactor(object):
 
     def react(self, items):
         for sources, remains, products in self.reactions:
-            print(sources, remains, products )
             if self.compare_items(items, sources):
                 non_react = items[len(sources):]
 

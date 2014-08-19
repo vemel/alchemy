@@ -9,8 +9,7 @@ class Item(Item):
     title = 'New item'
 
     def action_dublicate(self):
-        self.space.add(Item, self.pos)
-        self.space.add(Item, self.pos)
+        self.space.add(self.__class__, self.pos)
 
 
 class Item2(Item):
