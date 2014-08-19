@@ -15,7 +15,7 @@ Ubuntu:
     sudo apt-get install python-kivy kivy-examples
 
 
-Rest:
+Any other OS:
 
     http://kivy.org/docs/installation/installation.html
 
@@ -23,6 +23,18 @@ Rest:
 Get and run
 ============
 
-clone https://github.com/Volshebnyi/alchemy
-cd alchemy
-python main.py
+    clone https://github.com/Volshebnyi/alchemy
+    cd alchemy
+    python main.py
+    
+    
+TODO
+============
+    
+    * content generation from txt files
+    * better reactor
+    * win-lose conditions for levels
+    * save-load state mechanics
+    * fix space update
+    * initial items for space
+    * random add item
