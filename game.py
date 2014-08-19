@@ -1,7 +1,7 @@
 class Item(object):
     title = 'Item'
     desc = 'Simple description'
-    product_clss = []
+    source_clss = ()
 
     def __init__(self, space, pos):
         self.space = space
@@ -50,12 +50,39 @@ class BaseLevel(object):
 
 
 class BaseReactor(object):
-    reactions = (
+    reactions = [
+        ((Item, Item), (), (Item, Item, Item,)),
+    ]
 
-    )
+    def __init__(self, items_clss=None):
+        if items_clss:
+            for item_cls in items_clss:
+                for sources in item_cls.source_clss:
+                    reactions.append((sources, (), (item_cls, )))
+
+    @staticmethod
+    def compare_items(items, sources_sample):
+        for i, item in enumerate(items):
+            if i >= len(sources_sample):
+                return True
+
+            if item.__class__ != sources_sample[i]:
+                return False
+
+        return True
 
     def react(self, items):
-        return [], [Item, Item]
+        for sources, remains, products in self.reactions:
+            if self.compare_items(items, sources):
+                non_react = items[len(sources):]
+
+                remains = list(remains)
+                for item in items[:len(sources)]:
+                    if item.__class__ in remains:
+                        non_react.append(item)
+                        remains.remove(item.__class__)
+
+                return non_react, products
 
 
 class BaseSpace(object):

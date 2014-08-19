@@ -1,9 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 
-from game import BaseLevel, BaseSpace, Item
+from game import BaseLevel, BaseSpace, Item, BaseReactor
+
+
+class Reactor(BaseReactor):
+    pass
 
 class Space(BaseSpace):
-    pass
+    reactor_cls = Reactor
 
 
 class Level(BaseLevel):
