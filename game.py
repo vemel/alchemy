@@ -50,18 +50,19 @@ class BaseLevel(object):
 
 
 class BaseReactor(object):
-    reactions = [
-        ((Item, Item), (), (Item, Item, Item,)),
-    ]
+    items_clss = []
 
-    def __init__(self, items_clss=None):
-        if items_clss:
-            for item_cls in items_clss:
+    def __init__(self):
+        self.reactions = []
+        if self.items_clss:
+            for item_cls in self.items_clss:
                 for sources in item_cls.source_clss:
-                    reactions.append((sources, (), (item_cls, )))
+                    self.reactions.append((sources, (), (item_cls, )))
+                    print(self.reactions)
 
     @staticmethod
     def compare_items(items, sources_sample):
+        print(sources_sample)
         for i, item in enumerate(items):
             if i >= len(sources_sample):
                 return True
@@ -73,6 +74,7 @@ class BaseReactor(object):
 
     def react(self, items):
         for sources, remains, products in self.reactions:
+            print(sources, remains, products )
             if self.compare_items(items, sources):
                 non_react = items[len(sources):]
 
@@ -100,7 +102,11 @@ class BaseSpace(object):
 
     def react(self, items):
         item = items[0]
-        items_remain, products_clss = self.reactor.react(items)
+        result = self.reactor.react(items)
+        if not result:
+            return []
+
+        items_remain, products_clss = result
         products = []
         for product_cls in products_clss:
             products.append(self.add(product_cls, item.pos))
