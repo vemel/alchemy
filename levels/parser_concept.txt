@@ -1,0 +1,23 @@
+Parse %name%.txt to level_%name%.py
+
+custom.lvl.py must have
+///
+from __future__ import absolute_import, unicode_literals
+
+import random
+
+from game import BaseLevel, BaseSpace, Item, BaseReactor
+///
+
+File is divided in four sections by strings "***" between them.
+	1st section: every string is unique %item_name%
+		%item_name%
+	2nd section: reactions list
+		%item_name_a% + %item_name_b% = %item_name_c%
+	3rd section: if needed, contains actions written in python
+		%item_name% %action_name% (%arguments%)
+		{
+		code
+		}
+	4th section: level state on start — items and their position (keywords set [l(eft), r(ight), t(op), b(ottom), lt, rt, lb, rb, rand])
+		%item_name% %pos%
