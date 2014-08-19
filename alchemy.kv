@@ -1,0 +1,87 @@
+#:kivy 1.0
+#:import kivy kivy
+
+
+<MenuScreen>:
+    FloatLayout:
+        BoxLayout:
+            size_hint: 0.8, 0.8
+            pos_hint: {'x': 0.1, 'y': 0.1}
+            orientation: 'vertical'
+            Label:
+                text: 'Alchemy game'
+                valign: 'middle'
+                size_hint: 1.0, 0.15
+            Button:
+                text: 'Level 1'
+                on_press: root.manager.current = 'level1'
+                size_hint: 1.0, 0.15
+            Button:
+                text: 'Level 2'
+                on_press: root.manager.current = 'level2'
+                size_hint: 1.0, 0.15
+
+<LevelScreen>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+
+    BoxLayout:
+        padding: '10dp'
+        spacing: '10dp'
+        size_hint: 1, None
+        pos_hint: {'top': 1}
+        height: '44dp'
+        Image:
+            size_hint: None, None
+            size: '24dp', '24dp'
+            source: 'data/logo/kivy-icon-64.png'
+            mipmap: True
+        Label:
+            height: '24dp'
+            text_size: self.width, None
+            color: (1, 1, 1, .8)
+            text: 'Kivy %s - Alchemy' % kivy.__version__
+            valign: 'middle'
+        Button:
+            text: 'Menu'
+            on_press: root.manager.current = 'menu'
+
+<ActionsPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'Actions'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: description
+            height: '24dp'
+            text: 'My text'
+            valign: 'middle'
+        BoxLayout:
+            id: actions
+            orientation: 'vertical'
+        Button:
+            text: 'Close'
+            on_press: root.dismiss()
+
+<EventPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'None'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: description
+            height: '24dp'
+            text: 'My text'
+            valign: 'middle'
+        BoxLayout:
+            id: actions
+            orientation: 'vertical'
+        Button:
+            text: 'Close'
+            on_press: root.dismiss()
